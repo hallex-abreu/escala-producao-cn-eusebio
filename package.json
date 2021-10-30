@@ -1,0 +1,13 @@
+{
+  "name": "escala-producao-cn-eusebio",
+  "scripts": {
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node src/index.js"
+  },
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
