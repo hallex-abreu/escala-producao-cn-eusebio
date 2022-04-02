@@ -10,7 +10,8 @@ export default [
         ],
         days: [
             1, 3
-        ]
+        ],
+        isCoordinator: true
     },
     {
         peoples: [
@@ -19,7 +20,8 @@ export default [
         ],
         days: [
             1
-        ]
+        ],
+        isCoordinator: true
     },
     {
         peoples: [

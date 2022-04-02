@@ -1,4 +1,5 @@
 import volunteers from './voluntters';
+import dayjs from 'dayjs';
 
 const randomVolunteers = volunteers.map((value) => ({value, sort: Math.random()}))
 .sort((a, b) => a.sort - b.sort)
@@ -19,25 +20,25 @@ let cultHolySupper = 0;
 const date = new Date();
 const allDaysMoth = daysInMonth(date.getMonth() + 1, date.getFullYear());
 
-for(var i=1; i <= allDaysMoth; i++){    //looping through days in month
+for(var i=1; i <= allDaysMoth; i++){//looping through days in month
     var newDate = new Date(date.getFullYear(),date.getMonth(), i);
-    if(newDate.getDay() == 6 && isCultWoman === false){   //if Saturday
+    if(newDate.getDay() == 6 && isCultWoman === false){//if Saturday
         monthDays.push({
             day: 6,
-            date: `*Sábado - ${newDate.getDate() < 10 ? '0'+ newDate.getDate() : newDate.getDate()}/${newDate.getMonth() + 1 < 10 ? '0'+ newDate.getMonth() + 1 : newDate.getMonth() + 1}*`
+            date: `*Sábado - ${dayjs(newDate).format('DD/MM')}*`
         });
         isCultWoman = true;
     }
-    if(newDate.getDay() == 0){   //if Sunday
+    if(newDate.getDay() == 0){//if Sunday
         monthDays.push({
             day: 0,
-            date: `*Domingo - ${newDate.getDate() < 10 ? '0'+ newDate.getDate() : newDate.getDate()}/${newDate.getMonth() + 1 < 10 ? '0'+ newDate.getMonth() + 1 : newDate.getMonth() + 1}*`
+            date: `*Domingo - ${dayjs(newDate).format('DD/MM')}*`
         });
     }
-    if(newDate.getDay() == 4){   //if Thursday
+    if(newDate.getDay() == 4){//if Thursday
         monthDays.push({
             day: 4,
-            date: `*Quinta - ${newDate.getDate() < 10 ? '0'+ newDate.getDate() : newDate.getDate()}/${newDate.getMonth() + 1 < 10 ? '0'+ newDate.getMonth() + 1 : newDate.getMonth() + 1}*`
+            date: `*Quinta - ${dayjs(newDate).format('DD/MM')}*`
         });
     }
 }
@@ -45,7 +46,7 @@ for(var i=1; i <= allDaysMoth; i++){    //looping through days in month
 let schedule = `*Escala do mês de ${date.toLocaleString('pt-BR', { month: 'long' })}*\n*(Não esqueçam de confirmar)*\n`;
 
 for(let month of monthDays){
-    if(month.day === 6){
+    if(month.day === 6 && randomVolunteers.filter(volunteer => volunteer.days.includes(4)).length > 0){
         const volunters = randomVolunteers.filter(volunteer => volunteer.days.includes(4)).sort((a, b) => a.quantity - b.quantity)[0];
         const index = randomVolunteers.findIndex(volunteer => volunteer.id === volunters.id);
         randomVolunteers[index].quantity = randomVolunteers[index].quantity + 1;
